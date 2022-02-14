@@ -5,11 +5,12 @@ import Control.Applicative
 import Control.Monad
 import Control.Monad.Zip
 import Control.Monad.Fix
+import Control.Monad.IO.Class
 import Control.Arrow as Arrow
 import Control.Category as Cat
 import Data.Bifunctor
 
-data Neither a b = Neither deriving (Read, Show, Eq, Ord)
+data Neither a b = Neither deriving (Read, Show, Eq, Ord, Enum, Bounded)
 
 neither :: a -> b -> Neither a b
 neither _ _ = Neither
@@ -26,15 +27,18 @@ instance Applicative (Neither a) where
 
 instance Monad (Neither a) where
     _ >>= _ = Neither
-    _ >> _ = Neither
-    return _ = Neither
+
+instance MonadFail (Neither a) where
+    fail _ = Neither
+
+instance MonadIO (Neither a) where
+    liftIO _ = Neither
 
 instance Semigroup (Neither a b) where
     _ <> _ = Neither
 
 instance Monoid (Neither a b) where
     mempty = Neither
-    mappend _ _ = Neither
 
 instance Alternative (Neither a) where
     empty = Neither
@@ -62,6 +66,14 @@ instance MonadZip (Neither a) where
 
 instance MonadFix (Neither a) where
     mfix _ = Neither
+
+instance Foldable (Neither a) where
+    foldMap _ _ = mempty
+    foldr _ x _ = x
+    foldl _ x _ = x
+    elem _ _ = False
+    sum _ = 0
+    product _ = 1
 
 instance Category Neither where
     id = Neither
