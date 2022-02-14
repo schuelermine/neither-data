@@ -1,4 +1,9 @@
-# Revision history for neither
+# Revision history for neither-data
+
+## 0.2.0.0 -- 2022-02-14
+
+* Renamed to neither-data
+* Added different build methods & updated the cabal one
 
 ## 0.1.1.0 -- 2022-02-14
 

@@ -1,0 +1,7 @@
+{
+    "recommendations": [
+        "haskell.haskell",
+        "jnoortheen.nix-ide",
+        "brettm12345.nixfmt-vscode"
+    ]
+}
