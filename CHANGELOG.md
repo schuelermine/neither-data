@@ -1,5 +1,10 @@
 # Revision history for neither-data
 
+## 0.2.2.0 -- 2022-02-15
+
+* Added instances for:
+  * `Num`
+
 ## 0.2.1.0 -- 2022-02-15
 
 * Added instances for:
