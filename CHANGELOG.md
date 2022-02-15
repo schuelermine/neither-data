@@ -1,5 +1,14 @@
 # Revision history for neither-data
 
+## 0.2.1.0 -- 2022-02-15
+
+* Added instances for:
+  * `Traversable`
+  * `Bifoldable`
+  * `Bitraversable`
+  * `IsString`
+  * `Ix`
+
 ## 0.2.0.0 -- 2022-02-14
 
 * Renamed to neither-data
@@ -7,7 +16,11 @@
 
 ## 0.1.1.0 -- 2022-02-14
 
-* Added more instances & removed non-canonical methods
+* Removed non-canonical methods
+* Added instances for:
+  * `MonadFail`
+  * `MonadIO`
+  * `Foldable`
 
 ## 0.1.0.0 -- 2022-02-14
 
