@@ -11,7 +11,8 @@ import Control.Category as Cat
 import Data.Bifunctor
 import Data.Bifoldable
 import Data.Bitraversable
-import Data.Functor.Classes
+import Data.String
+import Data.Ix
 
 data Neither a b = Neither deriving (Read, Show, Eq, Ord, Enum, Bounded)
 
@@ -121,3 +122,12 @@ instance ArrowApply Neither where
 
 instance ArrowLoop Neither where
     loop _ = Neither
+
+instance IsString (Neither a b) where
+    fromString _ = Neither
+
+instance Ix (Neither a b) where
+    range _ = [Neither]
+    index _ _ = 0
+    inRange _ _ = True
+    rangeSize _ = 1
