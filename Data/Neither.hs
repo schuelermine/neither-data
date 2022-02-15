@@ -19,6 +19,15 @@ data Neither a b = Neither deriving (Read, Show, Eq, Ord, Enum, Bounded)
 neither :: a -> b -> Neither a b
 neither _ _ = Neither
 
+instance Num (Neither a b) where
+    _ + _ = Neither
+    _ - _ = Neither
+    _ * _ = Neither
+    negate _ = Neither
+    abs _ = Neither
+    signum _ = Neither
+    fromInteger _ = Neither
+
 instance Functor (Neither a) where
     fmap _ _ = Neither
     _ <$ _ = Neither
