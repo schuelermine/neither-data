@@ -9,6 +9,10 @@ import Control.Monad.IO.Class
 import Control.Arrow as Arrow
 import Control.Category as Cat
 import Data.Bifunctor
+import Data.Bifoldable
+import Data.Bitraversable
+import Data.String
+import Data.Ix
 
 data Neither a b = Neither deriving (Read, Show, Eq, Ord, Enum, Bounded)
 
@@ -75,6 +79,21 @@ instance Foldable (Neither a) where
     sum _ = 0
     product _ = 1
 
+instance Traversable (Neither a) where
+    traverse _ _ = pure Neither
+    sequenceA _ = pure Neither
+    mapM _ _ = pure Neither
+    sequence _ = pure Neither
+
+instance Bifoldable Neither where
+    bifold _ = mempty
+    bifoldMap _ _ _ = mempty
+    bifoldr _ _ x _ = x
+    bifoldl _ _ x _ = x
+
+instance Bitraversable Neither where
+    bitraverse _ _ _ = pure Neither
+
 instance Category Neither where
     id = Neither
     _ . _ = Neither
@@ -104,3 +123,11 @@ instance ArrowApply Neither where
 instance ArrowLoop Neither where
     loop _ = Neither
 
+instance IsString (Neither a b) where
+    fromString _ = Neither
+
+instance Ix (Neither a b) where
+    range _ = [Neither]
+    index _ _ = 0
+    inRange _ _ = True
+    rangeSize _ = 1
