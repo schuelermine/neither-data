@@ -26,7 +26,7 @@ import Data.Ix
 import Data.Fixed
 import Data.Bits
 
-data Neither a b = Neither deriving (Read, Show, Eq, Ord, Enum, Bounded, Typeable, Data)
+data Neither a b = Neither deriving (Read, Show, Eq, Ord, Enum, Bounded, Data)
 
 neither :: a -> b -> Neither a b
 neither _ _ = Neither
