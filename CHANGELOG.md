@@ -1,5 +1,27 @@
 # Revision history for neither-data
 
+## 0.2.3.0 -- 2022-02-16
+
+* Downgraded the compiler version from 9.2.1 to 8.10.7  
+  (This brings the two Nix build ways in line with each other and permits stack)
+* Added Stack as a build method
+* Added explanatory comments that serve as haddock documentation
+* Added documentation in ./doc that lists instances and explains missing ones
+* Built Haddock documentation as HTML to ./haddock
+* Added instances for:
+  * `Data`
+  * `Real`
+  * `Integral`
+  * `Fractional`
+  * `Floating`
+  * `RealFrac`
+  * `Bits`
+  * `FiniteBits`
+  * `Eq1`
+  * `Ord1`
+  * `Eq2`
+  * `Ord2`
+
 ## 0.2.2.0 -- 2022-02-15
 
 * Added instances for:
