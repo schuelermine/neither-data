@@ -14,8 +14,8 @@ extra-source-files:
     README.md
     CHANGELOG.md
 extra-doc-files:
-    ./doc/instances.md
-    ./doc/unimplemented.md
+    instances.md
+    unimplemented.md
 library
     exposed-modules:  Data.Neither
     -- Modules included in this library but not exported.
