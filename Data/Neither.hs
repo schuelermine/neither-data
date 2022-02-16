@@ -26,6 +26,7 @@ import Data.Ix
 import Data.Fixed
 import Data.Bits
 
+-- | The Neither type has a single constructor and ignores its type arguments
 data Neither a b = Neither deriving (Read, Show, Eq, Ord, Enum, Bounded, Data)
 
 -- | Produces a Neither value whose types match the arguments, discarding the arguments

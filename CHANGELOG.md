@@ -1,5 +1,11 @@
 # Revision history for neither-data
 
+## 0.2.3.1 -- 2022-02-16
+
+* Moved files in ./doc to top-level
+* Moved built haddock files to ./docs
+* Added Haddock comment for the Neither type itself
+
 ## 0.2.3.0 -- 2022-02-16
 
 * Downgraded the compiler version from 9.2.1 to 8.10.7  
