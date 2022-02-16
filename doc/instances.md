@@ -2,41 +2,48 @@
 
 These are the instances defined for `Neither`:
 
-- `instance Functor (Neither a)`
-- `instance Applicative (Neither a)`
-- `instance Monad (Neither a)`
-- `instance MonadFail (Neither a)`
-- `instance MonadIO (Neither a)`
-- `instance Semigroup (Neither a b)`
-- `instance Monoid (Neither a b)`
-- `instance Num (Neither a b)`
-- `instance Real (Neither a b)`
-- `instance Integral (Neither a b)`
-- `instance Fractional (Neither a b)`
-- `instance Floating (Neither a b)`
-- `instance RealFrac (Neither a b)`
-- `instance Bits (Neither a b)`
-- `instance FiniteBits (Neither a b)`
+- `instance (Data a, Data b) => Data (Neither a b)`
 - `instance Alternative (Neither a)`
-- `instance MonadPlus (Neither a)`
-- `instance Contravariant (Neither a)`
-- `instance Bifunctor Neither`
-- `instance MonadZip (Neither a)`
-- `instance MonadFix (Neither a)`
-- `instance Foldable (Neither a)`
-- `instance Traversable (Neither a)`
-- `instance Bifoldable Neither`
-- `instance Bitraversable Neither`
-- `instance Category Neither`
+- `instance Applicative (Neither a)`
 - `instance Arrow Neither`
-- `instance ArrowZero Neither`
-- `instance ArrowPlus Neither`
-- `instance ArrowChoice Neither`
 - `instance ArrowApply Neither`
+- `instance ArrowChoice Neither`
 - `instance ArrowLoop Neither`
+- `instance ArrowPlus Neither`
+- `instance ArrowZero Neither`
+- `instance Bifoldable Neither`
+- `instance Bifunctor Neither`
+- `instance Bitraversable Neither`
+- `instance Bits (Neither a b)`
+- `instance Bounded (Neither a b)`
+- `instance Category Neither`
+- `instance Contravariant (Neither a)`
+- `instance Enum (Neither a b)`
+- `instance Eq (Neither a b)`
+- `instance Eq1 (Neither a)`
+- `instance Eq2 Neither`
+- `instance FiniteBits (Neither a b)`
+- `instance Floating (Neither a b)`
+- `instance Foldable (Neither a)`
+- `instance Fractional (Neither a b)`
+- `instance Functor (Neither a)`
+- `instance Integral (Neither a b)`
 - `instance IsString (Neither a b)`
 - `instance Ix (Neither a b)`
-- `instance Eq1 (Neither a)`
+- `instance Monad (Neither a)`
+- `instance MonadFail (Neither a)`
+- `instance MonadFix (Neither a)`
+- `instance MonadIO (Neither a)`
+- `instance MonadPlus (Neither a)`
+- `instance MonadZip (Neither a)`
+- `instance Monoid (Neither a b)`
+- `instance Num (Neither a b)`
+- `instance Ord (Neither a b)`
 - `instance Ord1 (Neither a)`
-- `instance Eq2 Neither`
 - `instance Ord2 Neither`
+- `instance Read (Neither a b)`
+- `instance Real (Neither a b)`
+- `instance RealFrac (Neither a b)`
+- `instance Semigroup (Neither a b)`
+- `instance Show (Neither a b)`
+- `instance Traversable (Neither a)`
