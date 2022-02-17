@@ -1,7 +1,7 @@
 {
   outputs = { self, nixpkgs, flake-utils }:
     let preCall = import ./preCall.nix;
-    in preCall ({ ghcVersion ? "8107" }:
+    in preCall (fArgs@{ ghcVersion ? "8107" }:
       flake-utils.lib.eachSystem [ "x86_64-linux" ] (system:
         let
           lib = nixpkgs.lib;
@@ -12,11 +12,11 @@
             pkgs.haskellPackages;
         in {
           packages.neither-data = hkgs.callPackage ./neither-data.nix { };
-          devShell = self.devShells.${system}.neither-data;
+          devShell = (self fArgs).devShells.${system}.neither-data;
           devShells = let
             mkDevShell = args:
               pkgs.mkShellNoCC ({
-                inputsFrom = [ self.packages.${system}.neither-data ];
+                inputsFrom = [ (self fArgs).packages.${system}.neither-data ];
               } // args);
           in {
             neither-data = mkDevShell { };
