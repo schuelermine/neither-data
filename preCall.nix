@@ -3,9 +3,11 @@ f:
 let
   g = a:
     if isAttrs a then
-      f a // {
+      let x = f a;
+      in {
         __functor = self: b: g b;
-        __functionArgs = functionArgs f;
+      } // x // {
+        ${if x ? __functor then null else "__functionArgs"} = functionArgs f;
       }
     else
       f a;
