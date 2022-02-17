@@ -1,36 +1,32 @@
 {
   outputs = { self, nixpkgs, flake-utils }:
-    flake-utils.lib.eachSystem [ "x86_64-linux" ] (system:
-      let
-        lib = nixpkgs.lib;
-        ghc-version = "8107";
-        pkgs = nixpkgs.legacyPackages.${system};
-        hkgs = if ghc-version != null then
-          pkgs.haskell.packages."ghc${ghc-version}"
-        else
-          pkgs.haskellPackages;
-      in {
-        packages.neither-data = hkgs.callPackage ./neither-data.nix { };
-        devShell = self.devShells.${system}.neither-data;
-        devShells = let
-          mkDevShell = args:
-            pkgs.mkShellNoCC ({
-              inputsFrom = [ self.packages.${system}.neither-data ];
-            } // args);
-          mkCalled = f:
-            f { } // {
-              __functor = self: f;
-              __functionArgs = builtins.functionArgs f;
-            };
+    let preCall = import ./preCall.nix;
+    in preCall ({ ghcVersion ? "8107" }:
+      flake-utils.lib.eachSystem [ "x86_64-linux" ] (system:
+        let
+          lib = nixpkgs.lib;
+          pkgs = nixpkgs.legacyPackages.${system};
+          hkgs = if ghcVersion != null then
+            pkgs.haskell.packages."ghc${ghcVersion}"
+          else
+            pkgs.haskellPackages;
         in {
-          neither-data = mkDevShell { };
-          withCabal = mkDevShell { packages = with pkgs; [ cabal-install ]; };
-          withStack = mkDevShell { packages = with pkgs; [ stack ]; };
-          withCabalHls = mkCalled ({ editor ? null }:
-            mkDevShell {
-              buildInputs = lib.optional (editor != null) editor
-                ++ (with pkgs; [ cabal-install haskell-language-server ]);
-            });
-        };
-      });
+          packages.neither-data = hkgs.callPackage ./neither-data.nix { };
+          devShell = self.devShells.${system}.neither-data;
+          devShells = let
+            mkDevShell = args:
+              pkgs.mkShellNoCC ({
+                inputsFrom = [ self.packages.${system}.neither-data ];
+              } // args);
+          in {
+            neither-data = mkDevShell { };
+            withCabal = mkDevShell { packages = with pkgs; [ cabal-install ]; };
+            withStack = mkDevShell { packages = with pkgs; [ stack ]; };
+            withCabalHls = preCall ({ editor ? null }:
+              mkDevShell {
+                buildInputs = lib.optional (editor != null) editor
+                  ++ (with pkgs; [ cabal-install haskell-language-server ]);
+              });
+          };
+        }));
 }
