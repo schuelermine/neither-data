@@ -1,5 +1,11 @@
 # Revision history for neither-data
 
+## 0.2.3.2 -- 2022-03-06
+
+* Clarify README
+* Add links to GitHub and Hackage
+* Improve Nix flake, renamed `ghc-version` to `ghcVersion`
+
 ## 0.2.3.1 -- 2022-02-16
 
 * Moved files in ./doc to top-level
