@@ -1,5 +1,9 @@
 # Revision history for neither-data
 
+## 0.2.3.3 -- 2022-03-06
+
+* Rebuild documentation to docs/ in source repository, it was out-of-date
+
 ## 0.2.3.2 -- 2022-03-06
 
 * Clarify README
