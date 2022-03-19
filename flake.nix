@@ -19,6 +19,7 @@
     in preCall (fArgs@{ ghcVersion ? "8107" }:
       flake-utils.lib.eachSystem [ "x86_64-linux" ] (system:
         let
+          self' = self fArgs;
           lib = nixpkgs.lib;
           pkgs = nixpkgs.legacyPackages.${system};
           hkgs = if ghcVersion != null then
@@ -26,14 +27,20 @@
           else
             pkgs.haskellPackages;
         in {
-          packages.neither-data = hkgs.callPackage ./neither-data.nix { };
-          devShell = (self fArgs).devShells.${system}.neither-data;
+          defaultPackage = self'.packages.default;
+          # defaultPackage is deprecated as of Nix 2.7.0 in favour of packages.<system>.default
+          packages = rec {
+            neither-data = hkgs.callPackage ./neither-data.nix { };
+            default = neither-data;
+          };
+          devShell = self'.devShells.${system}.default;
+          # devShell is deprecated as of Nix 2.7.0 in favour of devShells.<system>.default
           devShells = let
             mkDevShell = args:
-              pkgs.mkShellNoCC ({
-                inputsFrom = [ (self fArgs).packages.${system}.neither-data ];
-              } // args);
-          in {
+              pkgs.mkShellNoCC
+              ({ inputsFrom = [ self'.packages.${system}.default ]; } // args);
+          in rec {
+            default = neither-data;
             neither-data = mkDevShell { };
             withCabal = mkDevShell { packages = with pkgs; [ cabal-install ]; };
             withStack = mkDevShell { packages = with pkgs; [ stack ]; };

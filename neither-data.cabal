@@ -1,6 +1,6 @@
 cabal-version:      2.4
 name:               neither-data
-version:            0.2.3.3
+version:            0.2.3.4
 synopsis:           The Neither datatype
 description:        A datatype that discards its two arguments
 homepage:           https://github.com/schuelermine/neither-data
